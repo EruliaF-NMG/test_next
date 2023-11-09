@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String       @unique
+  key           String       @unique
+  permissionIDs String[]     @db.ObjectId
+  userIDs       String[]     @db.ObjectId
+  permissions   Permission[] @relation(fields: [permissionIDs], references: [id])
+  users         User[]       @relation(fields: [userIDs], references: [id])
+}
+
+model Permission {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  name    String   @unique
+  key     String   @unique
+  roleIDs String[] @db.ObjectId
+  roles   Role[]   @relation(fields: [roleIDs], references: [id])
+}
+
+model User {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  email    String   @unique
+  name     String
+  password String
+  imageUrl String?
+  roleIDs  String[] @db.ObjectId
+  posts    Post[]
+  roles    Role[]   @relation(fields: [roleIDs], references: [id])
+}
+
+model Post {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  body       String
+  imageUrl   String?
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String   @db.ObjectId
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @db.ObjectId
+  createdAT  DateTime @default(now())
+}
+
+model Category {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String @unique
+  posts Post[]
+}
