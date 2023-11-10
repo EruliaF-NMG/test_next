@@ -1,6 +1,6 @@
 'use client'
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter,redirect, RedirectType } from "next/navigation";
 
 import { ButtonWithState } from "@/app/components/form/button/Button";
 import { InputBoxWithState } from "@/app/components/form/input-box/InputBox";
@@ -89,7 +89,8 @@ const CreateForm = ({
                }}
               onClickEvent={(error,result)=>{
                if(!error){
-                  router.reload("/")
+                  //redirect('/',RedirectType.push);
+                  router.push("/")
                   return;
                }
               }}

@@ -64,8 +64,6 @@ const FormElement=({
         }
     },[]);
 
-    console.log("formObject",formObject)
-
     return(
         <Fragment>
             {

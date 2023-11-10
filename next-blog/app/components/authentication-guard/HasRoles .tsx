@@ -14,7 +14,6 @@ const HasRoles = ({
 } : HasRolesProps ) => {
     const { data, status } = useSession();
     if(status === "loading") return null;
-    console.log(data);
     return(
         <>
         {

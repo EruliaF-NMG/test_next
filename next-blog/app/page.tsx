@@ -5,6 +5,7 @@ import { LoopItems } from "./components/common/util/LoopItems";
 
 export default async function Home() {
   const posts = await getPosts();
+  console.log("----------------Home----------")
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -32,3 +33,4 @@ export default async function Home() {
     </section>
   );
 }
+

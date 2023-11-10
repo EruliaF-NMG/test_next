@@ -54,7 +54,6 @@ export const formSlice = createSlice({
             };
         },
         setPageLoad: (state,action) => { 
-            console.log(action.payload,"setPageLoad")
             return {
                 ...state,
                 [action.payload.formGroupKey]:{

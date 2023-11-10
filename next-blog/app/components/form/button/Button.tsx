@@ -58,7 +58,6 @@ const ButtonWithState = ({
 
   const onBtnClick = () => {
     const object = onOverrideFormObject(_get(formObject,`${formGroupKey}`,{})) ?? _get(formObject,`${formGroupKey}`,{});
-    console.log(object,'----');
     dispatch(submitData({
       apiURL:apiUrl,
       apiMethod:apiMethod,

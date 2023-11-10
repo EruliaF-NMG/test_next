@@ -12,7 +12,6 @@ renderElse=null
 }:IsAuthProps) => {
     const { status,data } = useSession();
     if(status === "loading") return null;
-    console.log(data,"data-------------")
     return(
         <>
         {
