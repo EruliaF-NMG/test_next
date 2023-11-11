@@ -26,3 +26,12 @@ export const POST = async (req: Request) => {
         return errorResponse("Error creating permission", 500, ex);
     }
 }
+
+export const GET = async (req: Request) => {
+    try {
+        const permissions:Array<Permission> = await prisma.permission.findMany();
+        return successResponse("Permission List", 200, permissions);
+    } catch( ex:any ){
+        return errorResponse("Error to list Permission", 500, ex);
+    }
+}

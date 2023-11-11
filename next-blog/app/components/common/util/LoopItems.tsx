@@ -2,13 +2,13 @@
 
 interface LoopItemsProps {
     items: any[],
-    renderElemnt: (item:any,index:number)=>JSX.Element
+    renderElemnt?: (item:any,index:number)=>JSX.Element|null
 }
 
 const LoopItems = ({
     items=[],
     renderElemnt=(item:any,index:number)=>null,
-}) : JSX.Element =>  {
+}:LoopItemsProps) : JSX.Element =>  {
     return(
         <>
             {

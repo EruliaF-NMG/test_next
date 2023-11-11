@@ -1,15 +1,15 @@
 import { Table } from "@/app/components/common/table/Table";
 import { Tabs } from "@/app/components/common/tabs/Tabs";
-import { getUserAPI } from "@/config/api-end-opints";
+import { getRolesAPI } from "@/config/api-end-opints";
 import { ManageProfileNavi } from "@/config/navigation";
 import { getData } from "@/lib/reqvest_data/get-data";
 import Link from "next/link";
 
 
-const RowElemnt=(props:any)=>{
+const PermissionsElemnt=(props:any)=>{
   return (
     <>
-      {props.data.roles.map((role:any,index:number)=>role.name).join()}
+      {props.data.permissions.map((permission:any,index:number)=>permission.name).join()}
     </>
   )
 }
@@ -17,10 +17,10 @@ const RowElemnt=(props:any)=>{
 const ActionElemnt=(props:any)=>{
   return (
     <Link 
-      href={`/admin/manage-user/${props.data.id}`}
+      href={`/admin/manage-user/role/${props.data.id}`}
       className="text-blue-600 dark:text-blue-500 hover:underline"
     >
-      Manage User Roles
+      Manage Role's Permission
     </Link>
   )
 }
@@ -28,14 +28,14 @@ const ActionElemnt=(props:any)=>{
 
 
 export default async function Page() {
-    const data = await getData(getUserAPI);
+    const data = await getData(getRolesAPI);
     return (
       <section className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
              <Tabs
                 tabItms={ManageProfileNavi}
-                activeTabKey="user"
+                activeTabKey="role"
              />
              <Table
                 tablehead={[{
@@ -43,14 +43,14 @@ export default async function Page() {
                   label:"Name",
                   renderElemnt:()=>null
                 },{
-                  key:"email",
-                  label:"Email",
+                  key:"key",
+                  label:"Display Key",
                   renderElemnt:()=>null
                 },{
-                  key:"roles",
-                  label:"Roles",
+                  key:"permissions",
+                  label:"Permissions",
                   renderElemnt:(data:any)=> {
-                    return <RowElemnt data={data} />
+                    return <PermissionsElemnt data={data} />
                   }
                 },{
                   key:"action",

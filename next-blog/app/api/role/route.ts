@@ -28,3 +28,16 @@ export const POST = async (req: Request) => {
         return errorResponse("Error creating role", 500, ex);
     }
 }
+
+export const GET = async (req: Request) => {
+    try {
+        const roles:Array<Role> = await prisma.role.findMany({
+            include: {
+                permissions:true
+            }
+        });
+        return successResponse("Role List", 200, roles);
+    } catch( ex:any ){
+        return errorResponse("Error to list Role", 500, ex);
+    }
+}
